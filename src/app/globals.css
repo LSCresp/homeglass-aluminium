@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #000000;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-pattern {
+    /* Padrão art-déco super sutil com o dourado */
+    background-image: radial-gradient(rgba(212, 175, 55, 0.15) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .logo-wordmark {
+    font-family: "Prisma", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    letter-spacing: 0.03em;
+    /* ajuste fino */
+  }
+}
