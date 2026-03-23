@@ -34,11 +34,14 @@ export async function POST(request: Request) {
         }
 
         // B. Tentativa Telegram (A prova de falhas)
-        const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
-        const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+        const rawTelegramToken = process.env.TELEGRAM_BOT_TOKEN;
+        const rawTelegramChatId = process.env.TELEGRAM_CHAT_ID;
         
-        if (telegramToken && telegramChatId) {
-            // Removido o Markdown parser. Se o visitante digitar _, *, ou [, o Bot do Telegram entrava em colapso e bloqueava o servidor (Erro 400). Texto Limpo é 100% garantido.
+        if (rawTelegramToken && rawTelegramChatId) {
+            // Limpa aspas ou espaços acidentais vindos da variável de ambiente no Netlify
+            const telegramToken = rawTelegramToken.replace(/["'\s]/g, "");
+            const telegramChatId = rawTelegramChatId.replace(/["'\s]/g, "");
+
             const plainMsg = `🚨 NOVO LEAD: CÉLERE!\n\nNome: ${body.nome}\nWhats: ${body.whatsapp}\nLocal: ${body.cidade}-${body.uf}\nObra: ${body.situacao}\nInteresse: ${body.prioridades}\n\nPlanilha do sistema atualizada.`;
             
             await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
@@ -55,7 +58,7 @@ export async function POST(request: Request) {
             success: true, 
             message: "Lead processado", 
             sheets: sheetsStatus,
-            notificationRoute: (callMeBotKey || telegramToken) ? "Enviada" : "Aguardando chave(s)"
+            notificationRoute: (callMeBotKey || rawTelegramToken) ? "Enviada" : "Aguardando chave(s)"
         });
 
     } catch (error) {

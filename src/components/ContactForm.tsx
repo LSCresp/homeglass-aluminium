@@ -211,6 +211,7 @@ export function ContactForm() {
                                                 className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]"
                                                 placeholder="Seu nome completo"
                                                 required
+                                                value={formData.nome}
                                                 onChange={e => setFormData({ ...formData, nome: e.target.value })}
                                             />
                                         </div>
@@ -221,6 +222,7 @@ export function ContactForm() {
                                                 className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]"
                                                 placeholder="(00) 00000-0000"
                                                 required
+                                                value={formData.whatsapp}
                                                 onChange={e => setFormData({ ...formData, whatsapp: e.target.value })}
                                             />
                                         </div>
@@ -323,6 +325,7 @@ export function ContactForm() {
                                         <textarea
                                             className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 h-28 resize-none focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]/80 leading-relaxed"
                                             placeholder="Descreva particularidades do projeto, ambientes principais ou dúvidas extras..."
+                                            value={formData.observacoes}
                                             onChange={e => setFormData({ ...formData, observacoes: e.target.value })}
                                         ></textarea>
                                     </div>
