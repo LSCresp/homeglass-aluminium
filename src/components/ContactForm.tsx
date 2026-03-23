@@ -1,44 +1,54 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 import { FadeIn } from "./FadeIn";
 
 export function ContactForm() {
     const [formData, setFormData] = useState({
-        nome: "", cidade: "", situacao: "Projeto em andamento",
-        prioridade: "Iluminação e Clima", whatsapp: "", observacoes: ""
+        nome: "", uf: "", cidade: "", situacao: "Ainda em projeto (Planta)",
+        whatsapp: "", observacoes: ""
     });
+    
+    const [prioridades, setPrioridades] = useState<string[]>([]);
+    const [ufs, setUfs] = useState<{ id: number, sigla: string, nome: string }[]>([]);
+    const [cidades, setCidades] = useState<{ id: number, nome: string }[]>([]);
 
-    const WHATSAPP_NUMBER = "SEU_NUMERO_AQUI";
+    useEffect(() => {
+        fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome")
+            .then(res => res.json())
+            .then(data => setUfs(data))
+            .catch(() => console.error("Erro ao buscar UFs"));
+    }, []);
 
-    const handleFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const useEndpoint = false;
-
-        if (useEndpoint) {
-            try {
-                await fetch('/api/contato-endpoint', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-                alert("Sua solicitação foi enviada com sucesso! Em breve entraremos em contato.");
-            } catch (error) {
-                alert("Erro ao enviar contato. Tente novamente mais tarde.");
-            }
+    const handleUfChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const uf = e.target.value;
+        setFormData({ ...formData, uf, cidade: "" });
+        if (uf) {
+            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`)
+                .then(res => res.json())
+                .then(data => setCidades(data))
+                .catch(() => console.error("Erro ao buscar cidades"));
         } else {
-            const msg = `Olá Célere! Gostaria de um orçamento para automação.%0A%0A*Nome:* ${formData.nome}%0A*Cidade:* ${formData.cidade}%0A*Fase do Imóvel:* ${formData.situacao}%0A*Interesse principal:* ${formData.prioridade}%0A*Telefone:* ${formData.whatsapp}%0A%0A*Observações:* ${formData.observacoes}`;
-            window.open(`https://wa.me/${+5514997302774}?text=${msg}`, "_blank");
+            setCidades([]);
         }
     };
 
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        const listaPrioridades = prioridades.length > 0 ? prioridades.join(", ") : "Não especificado diretamente";
+        const msg = `Olá Célere! Gostaria de um orçamento para automação.%0A%0A*Nome:* ${formData.nome}%0A*Local:* ${formData.cidade} - ${formData.uf}%0A*Fase do Imóvel:* ${formData.situacao}%0A*Interesses:* ${listaPrioridades}%0A*Telefone:* ${formData.whatsapp}%0A%0A*Observações:* ${formData.observacoes}`;
+        
+        window.open(`https://wa.me/5514997302774?text=${msg}`, "_blank");
+    };
+
     const faqs = [
-        { q: "A automação funciona caso a internet caia?", a: "Sim. Em nossa arquitetura com Home Assistant ou hubs Zigbee descentralizados, o processamento é estritamente local. Acionar luzes, cortinas e acessar recursos essenciais não depende de conexão externa." },
-        { q: "Qual a diferença entre a Célere e comprar dispositivos smart comuns?", a: "Equipamentos de varejo (Wi-Fi) sobrecarregam o roteador e dependem de nuvens chinesas. A Célere utiliza protocolos de rede mesh como Zigbee, independentes de Wi-Fi, integrando tudo nativamente em painéis velozes." },
-        { q: "É possível instalar a automação em um imóvel já pronto?", a: "Perfeitamente. Diferente da antiga automação centralizada que exigia longos conduítes para quadros elétricos gigantes, nossa engenharia descentralizada (wireless e mesh) permite retrofits limpos e sem quebra de alvenaria." },
-        { q: "O sistema ficará obsoleto? Pode ser expandido futuramente?", a: "Nossos projetos são construídos sobre plataformas modulares modernas (como Home Assistant/Zigbee). É possível adicionar novos dispositivos e marcas no futuro sem perder o investimento inicial." },
-        { q: "Como funciona a manutenção a longo prazo?", a: "Além das garantias, prestamos suporte remoto seguro da central local, corrigindo lógicas ou adicionando integrações de forma rápida, mantendo sua casa sempre atualizada." },
+        { q: "A automação funciona caso a internet caia?", a: "Sistemas comuns e roteadores básicos do mercado param totalmente sem conexão externa. Porém, na Célere podemos oferecer soluções avançadas e descentralizadas focadas no processamento estritamente local que resolvem e evitam esse problema." },
+        { q: "Qual a diferença entre a Célere e comprar dispositivos smart comuns?", a: "Equipamentos de varejo (Wi-Fi) sobrecarregam o roteador e dependem de nuvens isoladas. A Célere utiliza protocolos de rede mesh como Zigbee, independentes de Wi-Fi, integrando tudo nativamente em painéis velozes." },
+        { q: "É possível instalar a automação em um imóvel já pronto?", a: "Perfeitamente. Diferente da antiga automação centralizada que exigia longos conduítes para quadros elétricos gigantes, nossa arquitetura (wireless e mesh) permite retrofits limpos e sem quebra excessiva de alvenaria." },
+        { q: "O sistema ficará obsoleto? Pode ser expandido futuramente?", a: "Nossos projetos são construídos sobre plataformas modulares modernas (como base conceitual Home Assistant). É possível adicionar novos dispositivos e marcas no futuro sem perder o investimento inicial." },
+        { q: "Como funciona a manutenção a longo prazo?", a: "Além das garantias, prestamos amplo suporte para corrigir lógicas, diagnosticar dispositivos ou adicionar integrações de forma pontual, mantendo sua casa sempre atualizada e estável." },
     ];
 
     return (
@@ -68,7 +78,7 @@ export function ContactForm() {
             </section>
 
             <section id="contato" className="py-32 px-6 bg-gradient-to-b from-[#FDFBF7] to-[#F6F2EA] border-t border-[rgba(18,18,18,.05)] relative pb-40">
-                <div className="container mx-auto px-6 max-w-5xl text-center mb-24">
+                <div className="container mx-auto px-6 max-w-5xl text-center mb-20">
                     <FadeIn>
                         <span className="text-celere-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Engenharia Sob Medida</span>
                         <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 text-[#121212]">Inicie seu projeto consultivo</h2>
@@ -78,39 +88,38 @@ export function ContactForm() {
                     </FadeIn>
                 </div>
 
-                <div className="container mx-auto max-w-5xl grid md:grid-cols-2 gap-12 items-center">
-                    <FadeIn direction="right">
-                        <div>
+                <div className="container mx-auto max-w-6xl grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                    <div className="lg:col-span-5 relative lg:sticky lg:top-32">
+                        <FadeIn direction="right">
                             <h2 className="text-4xl font-serif font-bold mb-6 text-celere-black">Dê o primeiro passo.</h2>
-                            <p className="text-celere-gray mb-8">
-                                Preencha o formulário para entendermos o seu momento. Nossa equipe técnica entrará em contato para agendar uma consultoria sem compromisso.
+                            <p className="text-celere-gray mb-10 text-lg leading-relaxed">
+                                Preencha o formulário para entendermos o seu momento. Nossa equipe entrará em contato para agendar uma consultoria detalhada sem compromisso.
                             </p>
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-4 text-sm text-celere-gray">
-                                    <div className="w-10 h-10 rounded-full bg-celere-dark flex items-center justify-center border border-celere-gold/20 shadow-sm text-lg text-celere-black">📐</div>
-                                    Análise estrutural da planta e alinhamento do escopo
+                            <div className="space-y-6">
+                                <div className="flex items-center gap-5 text-celere-gray">
+                                    <div className="w-12 h-12 rounded-full bg-celere-dark flex items-center justify-center border border-celere-gold/20 shadow-sm text-xl text-celere-black shrink-0">📐</div>
+                                    <p className="text-sm font-medium leading-relaxed">Análise estrutural minuciosa da sua planta e alinhamento prático de escopo.</p>
                                 </div>
-                                <div className="flex items-center gap-4 text-sm text-celere-gray">
-                                    <div className="w-10 h-10 rounded-full bg-celere-dark flex items-center justify-center border border-celere-gold/20 shadow-sm text-lg text-celere-black">🤝</div>
-                                    Reuniões agendadas conforme sua disponibilidade
+                                <div className="flex items-center gap-5 text-celere-gray">
+                                    <div className="w-12 h-12 rounded-full bg-celere-dark flex items-center justify-center border border-celere-gold/20 shadow-sm text-xl text-celere-black shrink-0">🤝</div>
+                                    <p className="text-sm font-medium leading-relaxed">Reuniões agendadas conforme sua disponibilidade de agenda e prioridades.</p>
                                 </div>
                             </div>
-                        </div>
-                    </FadeIn>
+                        </FadeIn>
+                    </div>
 
-
-                    <div className="relative">
+                    <div className="lg:col-span-7 relative">
                         <FadeIn direction="left" delay={200} className="w-full">
-                            <div className="bg-[#FDFBF7] p-10 md:p-14 border border-[rgba(18,18,18,.04)] rounded-[2rem] relative shadow-[0_20px_60px_rgb(0,0,0,0.04)]">
-                                <div className="absolute top-0 right-0 w-48 h-48 bg-celere-gold opacity-5 blur-3xl rounded-full pointer-events-none"></div>
-                                <form onSubmit={handleFormSubmit} className="space-y-6 relative z-10">
-                                    <div className="grid grid-cols-2 gap-6">
-                                        <div className="space-y-2 col-span-2 md:col-span-1">
+                            <div className="bg-[#FDFBF7] p-8 md:p-12 border border-[rgba(18,18,18,.04)] rounded-[2.5rem] relative shadow-[0_20px_60px_rgb(0,0,0,0.05)] overflow-hidden">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-celere-gold opacity-10 blur-[80px] rounded-full pointer-events-none"></div>
+                                <form onSubmit={handleFormSubmit} className="space-y-7 relative z-10">
+                                    <div className="grid grid-cols-2 gap-5">
+                                        <div className="space-y-2 col-span-2">
                                             <label className="text-sm font-bold text-[#121212]">Nome completo</label>
                                             <input
                                                 type="text"
-                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-3.5 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors"
-                                                placeholder="Seu nome"
+                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]"
+                                                placeholder="Seu nome completo"
                                                 required
                                                 onChange={e => setFormData({ ...formData, nome: e.target.value })}
                                             />
@@ -119,7 +128,7 @@ export function ContactForm() {
                                             <label className="text-sm font-bold text-[#121212]">Telefone / WhatsApp</label>
                                             <input
                                                 type="tel"
-                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-3.5 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors"
+                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]"
                                                 placeholder="(00) 00000-0000"
                                                 required
                                                 onChange={e => setFormData({ ...formData, whatsapp: e.target.value })}
@@ -127,62 +136,88 @@ export function ContactForm() {
                                         </div>
 
                                         <div className="space-y-2 col-span-2 md:col-span-1">
-                                            <label className="text-sm font-bold text-[#121212]">Sua Cidade e Estado</label>
-                                            <input
-                                                type="text"
-                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-3.5 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors"
-                                                placeholder="Ex: São Paulo - SP"
+                                            <label className="text-sm font-bold text-[#121212]">Estado</label>
+                                            <select
+                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]/80"
                                                 required
+                                                value={formData.uf}
+                                                onChange={handleUfChange}
+                                            >
+                                                <option value="">Selecione o Estado</option>
+                                                {ufs.map(uf => (
+                                                    <option key={uf.id} value={uf.sigla}>{uf.nome}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        
+                                        <div className="space-y-2 col-span-2 md:col-span-1">
+                                            <label className="text-sm font-bold text-[#121212]">Cidade</label>
+                                            <select
+                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]/80 disabled:opacity-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                                                required
+                                                disabled={!formData.uf || cidades.length === 0}
+                                                value={formData.cidade}
                                                 onChange={e => setFormData({ ...formData, cidade: e.target.value })}
-                                            />
+                                            >
+                                                <option value="">{formData.uf ? "Selecione a Cidade" : "Selecione o Estado primeiro"}</option>
+                                                {cidades.map(cidade => (
+                                                    <option key={cidade.id} value={cidade.nome}>{cidade.nome}</option>
+                                                ))}
+                                            </select>
                                         </div>
                                         
                                         <div className="space-y-2 col-span-2 md:col-span-1">
                                             <label className="text-sm font-bold text-[#121212]">Situação do Imóvel</label>
                                             <select
-                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-3.5 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors text-[#121212]/80"
+                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]/80"
                                                 required
                                                 onChange={e => setFormData({ ...formData, situacao: e.target.value })}
-                                                defaultValue="Projeto em andamento"
+                                                value={formData.situacao}
                                             >
-                                                <option value="Ainda em projeto">Ainda em projeto (Planta)</option>
-                                                <option value="Obra em andamento">Em construção civil</option>
-                                                <option value="Reforma">Entrando em reforma</option>
-                                                <option value="Imóvel pronto">Imóvel pronto pra morar</option>
+                                                <option value="Ainda em projeto (Planta)">Ainda em projeto (Planta)</option>
+                                                <option value="Em construção civil">Em construção civil</option>
+                                                <option value="Entrando em reforma">Entrando em reforma</option>
+                                                <option value="Imóvel pronto pra morar">Imóvel pronto pra morar</option>
                                             </select>
                                         </div>
                                         
-                                        <div className="space-y-2 col-span-2">
-                                            <label className="text-sm font-bold text-[#121212]">O que você mais deseja automatizar?</label>
-                                            <select
-                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-3.5 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors text-[#121212]/80"
-                                                required
-                                                onChange={e => setFormData({ ...formData, prioridade: e.target.value })}
-                                                defaultValue="Iluminação e Clima"
-                                            >
-                                                <option value="Iluminação e Clima">Iluminação e Ar-condicionado</option>
-                                                <option value="Áudio e Home-Theater">Áudio integrado e Home-Theater</option>
-                                                <option value="Segurança e Câmeras">Segurança (Câmeras e Fechaduras)</option>
-                                                <option value="Cortinas e Persianas">Cortinas e Persianas automáticas</option>
-                                                <option value="Casa Completa">A casa toda (Completo)</option>
-                                                <option value="Ainda não sei">Gostaria de consultoria p/ decidir</option>
-                                            </select>
+                                        <div className="space-y-3 col-span-2 pt-2 border-t border-[rgba(18,18,18,0.04)] mt-2">
+                                            <label className="text-sm font-bold text-[#121212] block my-4 pt-1">Quais soluções despertam seu interesse? <span className="text-xs font-normal text-gray-500 block md:inline mt-1 md:mt-0 md:ml-2">(Múltipla escolha)</span></label>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                {["Iluminação Inteligente", "Climatização", "Áudio e Vídeo", "Segurança (CFTV/Alarmes)", "Persianas e Cortinas", "Wi-Fi e Rede Mesh"].map((item) => (
+                                                    <label key={item} className="flex items-center gap-3 p-4 border border-[rgba(18,18,18,.06)] rounded-xl cursor-pointer hover:bg-celere-gold/5 transition-colors group bg-white shadow-sm">
+                                                        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors shadow-inner ${prioridades.includes(item) ? 'bg-[#121212] border-[#121212]' : 'bg-white border-gray-300 group-hover:border-celere-gold'}`}>
+                                                            {prioridades.includes(item) && <svg className="w-3 h-3 text-celere-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                                                        </div>
+                                                        <input 
+                                                            type="checkbox" 
+                                                            className="hidden"
+                                                            checked={prioridades.includes(item)}
+                                                            onChange={(e) => {
+                                                                if (e.target.checked) setPrioridades([...prioridades, item]);
+                                                                else setPrioridades(prioridades.filter(p => p !== item));
+                                                            }}
+                                                        />
+                                                        <span className={`text-sm font-semibold transition-colors ${prioridades.includes(item) ? 'text-[#121212]' : 'text-[#121212]/70'}`}>{item}</span>
+                                                    </label>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="space-y-2">
+                                    <div className="space-y-2 pt-4">
                                         <label className="text-sm font-bold text-[#121212]">Detalhes adicionais (Opcional)</label>
                                         <textarea
-                                            className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-4 h-24 resize-none focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors"
-                                            placeholder="Conte-nos um pouco sobre o que você imagina para sua casa..."
+                                            className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 h-28 resize-none focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]/80 leading-relaxed"
+                                            placeholder="Descreva particularidades do projeto, ambientes principais ou dúvidas extras..."
                                             onChange={e => setFormData({ ...formData, observacoes: e.target.value })}
                                         ></textarea>
                                     </div>
 
-                                    <button type="submit" className="w-full bg-[#121212] py-4 rounded-xl text-white font-bold tracking-wide hover:bg-celere-gold transition-colors duration-300 shadow-[0_4px_14px_rgb(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.23)] mt-4">
+                                    <button type="submit" className="w-full bg-[#121212] py-5 rounded-xl text-white font-bold tracking-[0.05em] uppercase hover:bg-celere-gold transition-all duration-500 shadow-[0_8px_20px_rgb(0,0,0,0.15)] hover:shadow-[0_10px_30px_rgba(212,175,55,0.3)] hover:-translate-y-1 mt-8 text-sm">
                                         Solicitar Orçamento
                                     </button>
-                                    <p className="text-xs text-center text-[#121212]/50 mt-6 tracking-wide">Seus dados estão protegidos sob sigilo de projeto.</p>
+                                    <p className="text-xs text-center text-[#121212]/40 mt-6 tracking-wide font-medium">Seus dados e as diretrizes do seu projeto estão seguros sob sigilo.</p>
                                 </form>
                             </div>
                         </FadeIn>
@@ -190,16 +225,12 @@ export function ContactForm() {
                 </div >
             </section >
 
-            <footer className="relative -mt-16 z-20 bg-gradient-to-t from-[#F6F2EA]/90 to-[#FDFBF7]/70 backdrop-blur-2xl pt-10 pb-6 shadow-[0_-12px_40px_-10px_rgba(0,0,0,0.06)] overflow-hidden text-center text-sm text-celere-gray rounded-t-[3rem] border-t border-[#FDFBF7]/60">
-                <div className="absolute inset-0 bg-[#FDFBF7]/30 z-0 pointer-events-none mix-blend-overlay"></div>
-                {/* Linha de reflexo (highlight) que dá o volume do vidro na extremidade superior */}
+            <footer className="relative z-20 bg-gradient-to-t from-[#F6F2EA]/90 to-[#FDFBF7]/70 backdrop-blur-2xl pt-10 pb-6 shadow-[0_-12px_40px_-10px_rgba(0,0,0,0.06)] overflow-hidden text-center text-sm text-celere-gray rounded-t-[3rem] border-t border-[#FDFBF7]/60">
                 <div className="absolute inset-x-0 top-0 h-[10px] bg-gradient-to-b from-[#FDFBF7] to-transparent opacity-80 z-0 pointer-events-none"></div>
 
-                <div className="container mx-auto px-6 flex flex-col items-center relative z-10 w-full pt-2">
-                    <div className="bg-[#FDFBF7] px-3 py-1.5 rounded-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] mb-3">
-                        <img src="/logo.png" alt="Célere Engenharia de Automação" className="h-[4rem] md:h-[5rem] w-auto object-contain opacity-95 drop-shadow-sm filter contrast-[1.05]" />
-                    </div>
-                    <p className="text-xs tracking-wide">© {new Date().getFullYear()} Célere - Engenharia de Automação para Alto Padrão. Todos os direitos reservados.</p>
+                <div className="container mx-auto px-6 flex flex-col items-center justify-center relative z-10 w-full pt-4">
+                    <img src="/logo.png" alt="Célere Engenharia de Automação" className="h-[4.5rem] w-auto object-contain opacity-90 drop-shadow-md filter contrast-[1.05] mb-5 mix-blend-multiply" />
+                    <p className="text-xs tracking-wider text-[#121212]/60 font-medium">© {new Date().getFullYear()} Célere - Engenharia de Automação. Todos os direitos reservados.</p>
                 </div>
             </footer>
         </>
