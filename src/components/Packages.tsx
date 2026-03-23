@@ -14,7 +14,7 @@ export function Packages() {
                     <p className="text-center text-white/60 max-w-3xl mx-auto mb-20 text-sm md:text-base leading-relaxed">
                         A Célere não comercializa pacotes genéricos de produtos. Cada quadro abaixo representa um 
                         <strong> perfil referencial de projeto</strong> para balizar as expectativas de sofisticação 
-                        e profundidade de engenharia antes da nossa consultoria de viabilidade.
+                        e profundidade de engenharia antes da nossa consultoria.
                     </p>
                 </FadeIn>
                 <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
@@ -51,7 +51,7 @@ export function Packages() {
                                 ))}
                             </ul>
                         </div>
-                        <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-[#121212] font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-shadow duration-300">Solicitar Viabilidade</button>
+                        <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-[#121212] font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-shadow duration-300">Solicitar Orçamento</button>
                     </FadeIn>
 
                     <FadeIn delay={300} direction="up" className="p-10 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md rounded-2xl shadow-sm h-full flex flex-col transition-colors duration-500">

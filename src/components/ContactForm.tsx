@@ -6,8 +6,8 @@ import { FadeIn } from "./FadeIn";
 
 export function ContactForm() {
     const [formData, setFormData] = useState({
-        nome: "", cidade: "", tipoImovel: "Casa", situacao: "Obra",
-        prioridade: "Iluminação", horario: "", whatsapp: "", observacoes: ""
+        nome: "", cidade: "", situacao: "Projeto em andamento",
+        prioridade: "Iluminação e Clima", whatsapp: "", observacoes: ""
     });
 
     const WHATSAPP_NUMBER = "SEU_NUMERO_AQUI";
@@ -28,17 +28,17 @@ export function ContactForm() {
                 alert("Erro ao enviar contato. Tente novamente mais tarde.");
             }
         } else {
-            const msg = `Olá Célere! Gostaria de uma consultoria.%0A%0A*Nome:* ${formData.nome}%0A*Cidade:* ${formData.cidade}%0A*Imóvel:* ${formData.tipoImovel} (${formData.situacao})%0A*Prioridade:* ${formData.prioridade}%0A*Telefone/Whats:* ${formData.whatsapp}%0A*Melhor horário p/ contato:* ${formData.horario}%0A%0A*Observações:* ${formData.observacoes}`;
+            const msg = `Olá Célere! Gostaria de um orçamento para automação.%0A%0A*Nome:* ${formData.nome}%0A*Cidade:* ${formData.cidade}%0A*Fase do Imóvel:* ${formData.situacao}%0A*Interesse principal:* ${formData.prioridade}%0A*Telefone:* ${formData.whatsapp}%0A%0A*Observações:* ${formData.observacoes}`;
             window.open(`https://wa.me/${+5514997302774}?text=${msg}`, "_blank");
         }
     };
 
     const faqs = [
-        { q: "A automação funciona caso a internet caia?", a: "Sim. Nossa infraestrutura prioriza o processamento local. A falha do provedor de internet externo não impede o funcionamento de luzes, clima, áudio ou segurança na rede interna." },
-        { q: "Qual a diferença entre a Célere e comprar dispositivos smart comuns?", a: "Equipamentos de varejo operam como 'ilhas', congestionando seu Wi-Fi doméstico. A Célere entrega engenharia: cabeamento estruturado, estabilidade de sinal, e uma única interface que rege todo o ecossistema corporativo da residência." },
-        { q: "É possível instalar em um imóvel já pronto?", a: "Temos diretrizes de infraestrutura wireless corporativa para retrofits, reduzindo quebra de alvenaria. Porém, uma visita técnica é imperativa para avaliar bloqueios de rádio-frequência." },
-        { q: "O sistema ficará obsoleto? Pode ser expandido futuramente?", a: "Nossos projetos são construídos sobre protocolos abertos e modulares. É totalmente possível integrar novos cômodos ou atualizações sem perder o investimento inicial." },
-        { q: "Como funciona a manutenção a longo prazo?", a: "A Célere atua como uma parceira perene da sua construção. Mais do que garantia, mantemos monitoramento proativo de rede e equipe tática para suporte e refinamentos rápidos." },
+        { q: "A automação funciona caso a internet caia?", a: "Sim. Em nossa arquitetura com Home Assistant ou hubs Zigbee descentralizados, o processamento é estritamente local. Acionar luzes, cortinas e acessar recursos essenciais não depende de conexão externa." },
+        { q: "Qual a diferença entre a Célere e comprar dispositivos smart comuns?", a: "Equipamentos de varejo (Wi-Fi) sobrecarregam o roteador e dependem de nuvens chinesas. A Célere utiliza protocolos de rede mesh como Zigbee, independentes de Wi-Fi, integrando tudo nativamente em painéis velozes." },
+        { q: "É possível instalar a automação em um imóvel já pronto?", a: "Perfeitamente. Diferente da antiga automação centralizada que exigia longos conduítes para quadros elétricos gigantes, nossa engenharia descentralizada (wireless e mesh) permite retrofits limpos e sem quebra de alvenaria." },
+        { q: "O sistema ficará obsoleto? Pode ser expandido futuramente?", a: "Nossos projetos são construídos sobre plataformas modulares modernas (como Home Assistant/Zigbee). É possível adicionar novos dispositivos e marcas no futuro sem perder o investimento inicial." },
+        { q: "Como funciona a manutenção a longo prazo?", a: "Além das garantias, prestamos suporte remoto seguro da central local, corrigindo lógicas ou adicionando integrações de forma rápida, mantendo sua casa sempre atualizada." },
     ];
 
     return (
@@ -125,19 +125,62 @@ export function ContactForm() {
                                                 onChange={e => setFormData({ ...formData, whatsapp: e.target.value })}
                                             />
                                         </div>
+
+                                        <div className="space-y-2 col-span-2 md:col-span-1">
+                                            <label className="text-sm font-bold text-[#121212]">Sua Cidade e Estado</label>
+                                            <input
+                                                type="text"
+                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-3.5 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors"
+                                                placeholder="Ex: São Paulo - SP"
+                                                required
+                                                onChange={e => setFormData({ ...formData, cidade: e.target.value })}
+                                            />
+                                        </div>
+                                        
+                                        <div className="space-y-2 col-span-2 md:col-span-1">
+                                            <label className="text-sm font-bold text-[#121212]">Situação do Imóvel</label>
+                                            <select
+                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-3.5 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors text-[#121212]/80"
+                                                required
+                                                onChange={e => setFormData({ ...formData, situacao: e.target.value })}
+                                                defaultValue="Projeto em andamento"
+                                            >
+                                                <option value="Ainda em projeto">Ainda em projeto (Planta)</option>
+                                                <option value="Obra em andamento">Em construção civil</option>
+                                                <option value="Reforma">Entrando em reforma</option>
+                                                <option value="Imóvel pronto">Imóvel pronto pra morar</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div className="space-y-2 col-span-2">
+                                            <label className="text-sm font-bold text-[#121212]">O que você mais deseja automatizar?</label>
+                                            <select
+                                                className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-3.5 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors text-[#121212]/80"
+                                                required
+                                                onChange={e => setFormData({ ...formData, prioridade: e.target.value })}
+                                                defaultValue="Iluminação e Clima"
+                                            >
+                                                <option value="Iluminação e Clima">Iluminação e Ar-condicionado</option>
+                                                <option value="Áudio e Home-Theater">Áudio integrado e Home-Theater</option>
+                                                <option value="Segurança e Câmeras">Segurança (Câmeras e Fechaduras)</option>
+                                                <option value="Cortinas e Persianas">Cortinas e Persianas automáticas</option>
+                                                <option value="Casa Completa">A casa toda (Completo)</option>
+                                                <option value="Ainda não sei">Gostaria de consultoria p/ decidir</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div className="space-y-2">
-                                        <label className="text-sm font-bold text-[#121212]">Detalhes do projeto (Opcional)</label>
+                                        <label className="text-sm font-bold text-[#121212]">Detalhes adicionais (Opcional)</label>
                                         <textarea
-                                            className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-4 h-32 resize-none focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors"
+                                            className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-4 py-4 h-24 resize-none focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] transition-colors"
                                             placeholder="Conte-nos um pouco sobre o que você imagina para sua casa..."
                                             onChange={e => setFormData({ ...formData, observacoes: e.target.value })}
                                         ></textarea>
                                     </div>
 
                                     <button type="submit" className="w-full bg-[#121212] py-4 rounded-xl text-white font-bold tracking-wide hover:bg-celere-gold transition-colors duration-300 shadow-[0_4px_14px_rgb(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.23)] mt-4">
-                                        Solicitar Viabilidade Técnica
+                                        Solicitar Orçamento
                                     </button>
                                     <p className="text-xs text-center text-[#121212]/50 mt-6 tracking-wide">Seus dados estão protegidos sob sigilo de projeto.</p>
                                 </form>

@@ -60,7 +60,7 @@ export function Header() {
                         <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                     </a>
                     <a href="#contato" className="ml-2 bg-gold-gradient text-[#121212] px-8 py-3 rounded-full hover:brightness-110 transition-all duration-500 shadow-[0_4px_14px_rgba(212,175,55,0.2)] hover:shadow-[0_6px_25px_rgba(212,175,55,0.35)] font-bold tracking-wider text-sm relative overflow-hidden group flex items-center gap-2">
-                        <span className="relative z-10 transition-transform group-hover:-translate-x-1">Solicitar Viabilidade</span>
+                        <span className="relative z-10 transition-transform group-hover:-translate-x-1">Solicitar Orçamento</span>
                         <span className="relative z-10 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 font-black">&rarr;</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] skew-x-[-30deg] animate-[shine_3s_ease-in-out_infinite] transition-colors"></div>
                     </a>
@@ -78,7 +78,7 @@ export function Header() {
                     <a href="#diferenciais" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Diferenciais</a>
                     <a href="#pacotes" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Perfis de Projeto</a>
                     <a href="#contato" onClick={() => setIsMenuOpen(false)} className="text-celere-gold font-bold mt-4 tracking-wider flex items-center justify-between">
-                        Solicitar Viabilidade <span>&rarr;</span>
+                        Solicitar Orçamento <span>&rarr;</span>
                     </a>
                 </nav>
             </div>

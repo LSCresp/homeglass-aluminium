@@ -15,8 +15,8 @@ export function SocialProof() {
                     {[
                         { 
                             title: "Limpeza Arquitetônica", 
-                            metric: "De 14 interruptores para 1 Keypad", 
-                            desc: "Eliminamos a poluição visual das paredes. O controle integral do living, dimerização e cortinas foi unificado em uma única interface prime, valorizando o design de interiores."
+                            metric: "De 14 interruptores para 1 Painel Inteligente", 
+                            desc: "Eliminamos a poluição visual das paredes. O controle integral do living, dimerização e cortinas foi unificado em interfaces descentralizadas e elegantes, valorizando o design de interiores."
                         },
                         { 
                             title: "Gestão Autônoma", 
