@@ -40,7 +40,23 @@ export function ContactForm() {
         const listaPrioridades = prioridades.length > 0 ? prioridades.join(", ") : "Não especificado diretamente";
         const msg = `Olá Célere! Gostaria de um orçamento para automação.%0A%0A*Nome:* ${formData.nome}%0A*Local:* ${formData.cidade} - ${formData.uf}%0A*Fase do Imóvel:* ${formData.situacao}%0A*Interesses:* ${listaPrioridades}%0A*Telefone:* ${formData.whatsapp}%0A%0A*Observações:* ${formData.observacoes}`;
         
-        window.open(`https://wa.me/5514997302774?text=${msg}`, "_blank");
+        // A) Salvar silenciosamente no banco de dados / Google Sheets
+        try {
+            await fetch('/api/submit-lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    ...formData, 
+                    prioridades: listaPrioridades,
+                    data_solicitacao: new Date().toLocaleString()
+                })
+            });
+        } catch (error) {
+            console.error("Erro ao registrar no sheets via webhook", error);
+        }
+
+        // B) Abreva o WhatsApp com a notificação
+        window.open(`https://wa.me/5514991682432?text=${msg}`, "_blank");
     };
 
     const faqs = [
@@ -225,12 +241,16 @@ export function ContactForm() {
                 </div >
             </section >
 
-            <footer className="relative z-20 bg-gradient-to-t from-[#F6F2EA]/90 to-[#FDFBF7]/70 backdrop-blur-2xl pt-10 pb-6 shadow-[0_-12px_40px_-10px_rgba(0,0,0,0.06)] overflow-hidden text-center text-sm text-celere-gray rounded-t-[3rem] border-t border-[#FDFBF7]/60">
+            <footer className="relative z-20 -mt-16 bg-gradient-to-t from-[#F6F2EA]/90 to-[#FDFBF7]/70 backdrop-blur-2xl pt-10 pb-6 shadow-[0_-12px_40px_-10px_rgba(0,0,0,0.06)] overflow-hidden text-center text-sm text-celere-gray rounded-t-[3rem] border-t border-[#FDFBF7]/60">
+                <div className="absolute inset-0 bg-[#FDFBF7]/30 z-0 pointer-events-none mix-blend-overlay"></div>
+                {/* Linha de reflexo (highlight) que dá o volume do vidro na extremidade superior */}
                 <div className="absolute inset-x-0 top-0 h-[10px] bg-gradient-to-b from-[#FDFBF7] to-transparent opacity-80 z-0 pointer-events-none"></div>
 
                 <div className="container mx-auto px-6 flex flex-col items-center justify-center relative z-10 w-full pt-4">
-                    <img src="/logo.png" alt="Célere Engenharia de Automação" className="h-[4.5rem] w-auto object-contain opacity-90 drop-shadow-md filter contrast-[1.05] mb-5 mix-blend-multiply" />
-                    <p className="text-xs tracking-wider text-[#121212]/60 font-medium">© {new Date().getFullYear()} Célere - Engenharia de Automação. Todos os direitos reservados.</p>
+                    <div className="bg-[#FDFBF7] px-3 py-1.5 rounded-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] mb-3 inline-block">
+                        <img src="/logo.png" alt="Célere Casa Inteligente" className="h-[4.5rem] w-auto object-contain opacity-95 drop-shadow-sm filter contrast-[1.05]" />
+                    </div>
+                    <p className="text-xs tracking-wider text-[#121212]/60 font-medium">© {new Date().getFullYear()} Célere - Casa Inteligente. Todos os direitos reservados.</p>
                 </div>
             </footer>
         </>
