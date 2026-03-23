@@ -357,7 +357,7 @@ export function ContactForm() {
                 <div className="absolute inset-x-0 top-0 h-[10px] bg-gradient-to-b from-[#FDFBF7] to-transparent opacity-80 z-0 pointer-events-none"></div>
 
                 <div className="container mx-auto px-6 flex flex-col items-center justify-center relative z-10 w-full pt-4">
-                    <div className="bg-[#FDFBF7] px-3 py-1.5 rounded-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] mb-3 inline-block">
+                    <div className="bg-white px-3 py-1.5 rounded-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] mb-3 inline-block">
                         <img src="/logo.png" alt="Célere Casa Inteligente" className="h-[4.5rem] w-auto object-contain opacity-95 drop-shadow-sm filter contrast-[1.05]" />
                     </div>
                     <p className="text-xs tracking-wider text-[#121212]/60 font-medium">© {new Date().getFullYear()} Célere - Casa Inteligente. Todos os direitos reservados.</p>
