@@ -32,7 +32,9 @@ export function Packages() {
                                 ))}
                             </ul>
                         </div>
-                        <button className="w-full py-4 rounded-xl border border-[#FDFBF7]/20 text-[#FDFBF7] font-bold hover:bg-[#FDFBF7] hover:text-[#121212] transition-all duration-300">Explorar Perfil</button>
+                        <div className="mt-auto pt-6 border-t border-white/5 w-full text-center">
+                            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white/40">Comece com calma</span>
+                        </div>
                     </FadeIn>
 
                     <FadeIn delay={200} direction="up" className="p-10 border border-celere-gold/50 bg-gradient-to-b from-[#1A1A1A] to-[#121212] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] relative transform md:-translate-y-8 flex flex-col h-[105%]">
@@ -51,7 +53,9 @@ export function Packages() {
                                 ))}
                             </ul>
                         </div>
-                        <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-[#121212] font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-shadow duration-300">Solicitar Orçamento</button>
+                        <div className="mt-auto pt-6 border-t border-[#D4AF37]/20 w-full text-center">
+                            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-[#D4AF37]/90 text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] to-[#FCF6BA]">Melhor Custo-Benefício</span>
+                        </div>
                     </FadeIn>
 
                     <FadeIn delay={300} direction="up" className="p-10 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md rounded-2xl shadow-sm h-full flex flex-col transition-colors duration-500">
@@ -67,7 +71,9 @@ export function Packages() {
                                 ))}
                             </ul>
                         </div>
-                        <button className="w-full py-4 rounded-xl border border-[#FDFBF7]/20 text-[#FDFBF7] font-bold hover:bg-[#FDFBF7] hover:text-[#121212] transition-all duration-300">Explorar Perfil</button>
+                        <div className="mt-auto pt-6 border-t border-white/5 w-full text-center">
+                            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white/40">O máximo em sofisticação</span>
+                        </div>
                     </FadeIn>
 
                 </div>
