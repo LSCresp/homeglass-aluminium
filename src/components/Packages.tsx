@@ -24,7 +24,7 @@ export function Packages() {
                             <h3 className="text-2xl font-serif font-bold text-white mb-2">Perfil Base</h3>
                             <p className="text-xs text-white/50 mb-8 uppercase tracking-widest">A fundação inteligente</p>
                             <ul className="space-y-5 mb-10">
-                                {["Rede Wi-Fi de alta densidade", "Controle de iluminação em áreas úteis", "Controle de acesso premium", "Hub de processamento central"].map((i, k) => (
+                                {["Controle inteligente de iluminação", "Automação de ar condicionado", "Gestão climática unificada", "Aplicativo móvel centralizado"].map((i, k) => (
                                     <li key={k} className="flex items-start gap-4 text-sm text-[#F6F2EA]/80 leading-relaxed">
                                         <CheckCircle className="w-5 h-5 text-celere-gold shrink-0 mt-0.5" />
                                         <span>{i}</span>
@@ -43,7 +43,7 @@ export function Packages() {
                             <h3 className="text-3xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] mb-2">Perfil Pleno</h3>
                             <p className="text-xs text-[#F6F2EA]/60 mb-8 uppercase tracking-widest">A imersão diária</p>
                             <ul className="space-y-5 mb-10">
-                                {["Infraestrutura de Rede Base", "Áudio oculto multizona", "Climatização com interface limpa", "Monitoramento por CFTV", "Keypads de cena arquitetônicos"].map((i, k) => (
+                                {["Sub-sistemas do Perfil Base", "Rede Wi-Fi de alta densidade", "Cortinas e persianas motorizadas", "Sonorização ambiente integrada"].map((i, k) => (
                                     <li key={k} className="flex items-start gap-4 text-sm text-white font-medium leading-relaxed">
                                         <CheckCircle className="w-5 h-5 text-celere-gold shrink-0 mt-0.5" />
                                         <span>{i}</span>
@@ -59,7 +59,7 @@ export function Packages() {
                             <h3 className="text-2xl font-serif font-bold text-white mb-2">Perfil Absolute</h3>
                             <p className="text-xs text-white/50 mb-8 uppercase tracking-widest">A execução definitiva</p>
                             <ul className="space-y-5 mb-10">
-                                {["Sub-sistemas da linha Pleno", "Acústica Atmos / Cinema Privado", "Cabeamento estruturado Master", "Cortinas motorizadas integradas", "Termografia e biometria dupla"].map((i, k) => (
+                                {["Toda a infraestrutura do Pleno", "Home-theater de alto padrão", "Painel central touch (Wallpad)", "Câmeras de segurança com IA", "Operação local contínua (sem internet)"].map((i, k) => (
                                     <li key={k} className="flex items-start gap-4 text-sm text-[#F6F2EA]/80 leading-relaxed">
                                         <CheckCircle className="w-5 h-5 text-celere-gold shrink-0 mt-0.5" />
                                         <span>{i}</span>
