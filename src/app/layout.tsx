@@ -7,13 +7,13 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: '--font-montserrat
 const monoton = Monoton({ weight: '400', subsets: ["latin"], variable: '--font-monoton' });
 
 export const metadata: Metadata = {
-    title: "Célere – Engenharia de Automação Premium",
+    title: "Célere - Casa Inteligente | Automação Residencial Premium",
     description: "A infraestrutura invisível por trás do verdadeiro luxo. Projetos consultivos de automação corporativa, redes cftv, iluminação e som para imóveis de alto padrão.",
     openGraph: {
-        title: "Célere – Engenharia de Automação",
+        title: "Célere - Casa Inteligente",
         description: "Infraestrutura invisível e Engenharia para residências de alto padrão.",
         url: "https://celere-one.vercel.app/",
-        siteName: "Célere Engenharia de Automação",
+        siteName: "Célere Casa Inteligente",
         images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
         locale: "pt_BR",
         type: "website",
