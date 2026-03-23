@@ -59,22 +59,30 @@ export function ContactForm() {
         
         const listaPrioridades = prioridades.length > 0 ? prioridades.join(", ") : "Não especificado diretamente";
         
-        try {
-            await fetch('/api/submit-lead', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    ...formData, 
-                    prioridades: listaPrioridades,
-                    data_solicitacao: new Date().toLocaleString("pt-BR")
-                })
-            });
-        } catch (error) {
-            console.error("Erro ao registrar no sheets via webhook", error);
-        } finally {
+        // Requisição "Fire and Forget" no background (não trava o site esperando as APIs e o Google Sheets responderem)
+        fetch('/api/submit-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                ...formData, 
+                prioridades: listaPrioridades,
+                data_solicitacao: new Date().toLocaleString("pt-BR")
+            })
+        }).catch(error => console.error("Erro no envio do lead", error));
+
+        // Feedback de Loading com 800ms de duração só para transmitir peso premium de processamento, e Pop-up imediato
+        setTimeout(() => {
             setIsSubmitting(false);
-            setShowModal(true); // Exibe o pop-up de sucesso!
-        }
+            setShowModal(true); // Exibe o pop-up instantaneamente!
+            
+            // Background Clear (Limpa os dados por trás do Modal)
+            setFormData({
+                nome: "", uf: "", cidade: "", situacao: "Ainda em projeto (Planta)",
+                whatsapp: "", observacoes: ""
+            });
+            setPrioridades([]);
+            setCitySearch("");
+        }, 800);
     };
 
     const handleWhatsAppRedirect = () => {

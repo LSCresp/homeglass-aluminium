@@ -38,13 +38,15 @@ export async function POST(request: Request) {
         const telegramChatId = process.env.TELEGRAM_CHAT_ID;
         
         if (telegramToken && telegramChatId) {
+            // Removido o Markdown parser. Se o visitante digitar _, *, ou [, o Bot do Telegram entrava em colapso e bloqueava o servidor (Erro 400). Texto Limpo é 100% garantido.
+            const plainMsg = `🚨 NOVO LEAD: CÉLERE!\n\nNome: ${body.nome}\nWhats: ${body.whatsapp}\nLocal: ${body.cidade}-${body.uf}\nObra: ${body.situacao}\nInteresse: ${body.prioridades}\n\nPlanilha do sistema atualizada.`;
+            
             await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     chat_id: telegramChatId,
-                    text: decodeURIComponent(botMsg),
-                    parse_mode: 'Markdown'
+                    text: plainMsg
                 })
             }).catch(e => console.error("Erro Telegram Bot", e));
         }
