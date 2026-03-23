@@ -46,7 +46,7 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <a href="#contato" className="px-8 py-4 bg-transparent border border-celere-gold/30 text-white font-serif tracking-widest text-sm hover:bg-celere-gold/10 transition-colors uppercase flex items-center justify-center gap-3 w-full sm:w-auto">
+            <a href="#contato" className="bg-gold-gradient text-[#121212] px-8 py-4 rounded-full font-bold text-center transition-transform hover:scale-[1.02] shadow-lg hover:shadow-[0_12px_40px_rgba(212,175,55,.18)] flex justify-center items-center gap-2 w-full sm:w-auto">
                Fale Conosco
             </a>
 
