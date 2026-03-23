@@ -22,21 +22,38 @@ export async function POST(request: Request) {
         }
 
         // 2. Dispara Notificação no Celular Pessoal do Dono (+55 14 99168-2432)
+        const telefoneDono = "+5514991682432";
+        const botMsg = encodeURIComponent(
+            `🚨 *NOVO LEAD: CÉLERE!*\n\n*Nome:* ${body.nome}\n*Whats:* ${body.whatsapp}\n*Local:* ${body.cidade}-${body.uf}\n*Obra:* ${body.situacao}\n*Interesse:* ${body.prioridades}\n\nPlanilha atualizada!`
+        );
+
+        // A. Tentativa CallMeBot (WhatsApp)
         if (callMeBotKey) {
-            const telefoneDono = "+5514991682432";
-            const botMsg = encodeURIComponent(
-                `🚨 *NOVO LEAD: CÉLERE!*\n\n*Nome:* ${body.nome}\n*Whats:* ${body.whatsapp}\n*Local:* ${body.cidade}-${body.uf}\n*Obra:* ${body.situacao}\n*Interesse:* ${body.prioridades}\n\nAbra sua planilha para ver os detalhes completos!`
-            );
-            
             await fetch(`https://api.callmebot.com/whatsapp.php?phone=${telefoneDono}&text=${botMsg}&apikey=${callMeBotKey}`)
                 .catch(e => console.error("Erro WhatsApp Bot", e));
+        }
+
+        // B. Tentativa Telegram (A prova de falhas)
+        const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+        const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+        
+        if (telegramToken && telegramChatId) {
+            await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: telegramChatId,
+                    text: decodeURIComponent(botMsg),
+                    parse_mode: 'Markdown'
+                })
+            }).catch(e => console.error("Erro Telegram Bot", e));
         }
 
         return NextResponse.json({ 
             success: true, 
             message: "Lead processado", 
             sheets: sheetsStatus,
-            notificationRoute: callMeBotKey ? "Enviada" : "Aguardando chave"
+            notificationRoute: (callMeBotKey || telegramToken) ? "Enviada" : "Aguardando chave(s)"
         });
 
     } catch (error) {
