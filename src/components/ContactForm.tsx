@@ -299,7 +299,7 @@ export function ContactForm() {
                                         <div className="space-y-3 col-span-2 pt-2 border-t border-[rgba(18,18,18,0.04)] mt-2">
                                             <label className="text-sm font-bold text-[#121212] block my-4 pt-1">Quais soluções despertam seu interesse? <span className="text-xs font-normal text-gray-500 block md:inline mt-1 md:mt-0 md:ml-2">(Múltipla escolha)</span></label>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                {["Iluminação Inteligente", "Climatização", "Áudio e Vídeo", "Segurança (CFTV/Alarmes)", "Persianas e Cortinas", "Wi-Fi / Rede Mesh"].map((item) => (
+                                                {["Iluminação Inteligente", "Climatização", "Áudio e Vídeo", "Segurança (Câmeras/Alarmes)", "Persianas e Cortinas", "Wi-Fi / Rede Mesh"].map((item) => (
                                                     <label key={item} className="flex items-center gap-3 p-4 border border-[rgba(18,18,18,.06)] rounded-xl cursor-pointer hover:bg-celere-gold/5 transition-colors group bg-white shadow-sm">
                                                         <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors shadow-inner ${prioridades.includes(item) ? 'bg-[#121212] border-[#121212]' : 'bg-white border-gray-300 group-hover:border-celere-gold'}`}>
                                                             {prioridades.includes(item) && <svg className="w-3 h-3 text-celere-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}

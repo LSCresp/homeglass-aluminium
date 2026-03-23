@@ -8,7 +8,7 @@ const monoton = Monoton({ weight: '400', subsets: ["latin"], variable: '--font-m
 
 export const metadata: Metadata = {
     title: "Célere - Casa Inteligente | Automação Residencial Premium",
-    description: "A infraestrutura invisível por trás do verdadeiro luxo. Projetos consultivos de automação corporativa, redes cftv, iluminação e som para imóveis de alto padrão.",
+    description: "A infraestrutura invisível por trás do verdadeiro luxo. Projetos consultivos de automação corporativa, redes de câmeras, iluminação e som para imóveis de alto padrão.",
     openGraph: {
         title: "Célere - Casa Inteligente",
         description: "Infraestrutura invisível e Engenharia para residências de alto padrão.",
