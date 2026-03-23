@@ -9,17 +9,22 @@ export function Packages() {
 
             <div className="container mx-auto relative z-10">
                 <FadeIn>
-                    <span className="text-celere-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block text-center">Nossos Projetos</span>
-                    <h2 className="text-3xl md:text-5xl font-serif font-bold text-center mb-20 text-white">Padrões de Execução</h2>
+                    <span className="text-celere-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block text-center">Escopo Sob Medida</span>
+                    <h2 className="text-3xl md:text-5xl font-serif font-bold text-center mb-6 text-white">Níveis de Intervenção</h2>
+                    <p className="text-center text-white/60 max-w-3xl mx-auto mb-20 text-sm md:text-base leading-relaxed">
+                        A Célere não comercializa pacotes genéricos de produtos. Cada quadro abaixo representa um 
+                        <strong> perfil referencial de projeto</strong> para balizar as expectativas de sofisticação 
+                        e profundidade de engenharia antes da nossa consultoria de viabilidade.
+                    </p>
                 </FadeIn>
                 <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
 
                     <FadeIn delay={100} direction="up" className="p-10 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md rounded-2xl shadow-sm h-full flex flex-col transition-colors duration-500">
                         <div className="mb-auto">
-                            <h3 className="text-2xl font-serif font-bold text-white mb-2">Essential</h3>
-                            <p className="text-xs text-white/50 mb-8 uppercase tracking-widest">A porta de entrada</p>
+                            <h3 className="text-2xl font-serif font-bold text-white mb-2">Perfil Base</h3>
+                            <p className="text-xs text-white/50 mb-8 uppercase tracking-widest">A fundação inteligente</p>
                             <ul className="space-y-5 mb-10">
-                                {["Iluminação inteligente básica", "Rede Wi-Fi de alta performance", "Fechadura digital premium", "Hub de integração"].map((i, k) => (
+                                {["Rede Wi-Fi de alta densidade", "Controle de iluminação em áreas úteis", "Controle de acesso premium", "Hub de processamento central"].map((i, k) => (
                                     <li key={k} className="flex items-start gap-4 text-sm text-[#F6F2EA]/80 leading-relaxed">
                                         <CheckCircle className="w-5 h-5 text-celere-gold shrink-0 mt-0.5" />
                                         <span>{i}</span>
@@ -27,18 +32,18 @@ export function Packages() {
                                 ))}
                             </ul>
                         </div>
-                        <button className="w-full py-4 rounded-xl border border-[#FDFBF7]/20 text-[#FDFBF7] font-bold hover:bg-[#FDFBF7] hover:text-[#121212] transition-all duration-300">Mais Detalhes</button>
+                        <button className="w-full py-4 rounded-xl border border-[#FDFBF7]/20 text-[#FDFBF7] font-bold hover:bg-[#FDFBF7] hover:text-[#121212] transition-all duration-300">Explorar Perfil</button>
                     </FadeIn>
 
                     <FadeIn delay={200} direction="up" className="p-10 border border-celere-gold/50 bg-gradient-to-b from-[#1A1A1A] to-[#121212] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] relative transform md:-translate-y-8 flex flex-col h-[105%]">
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-[#121212] px-6 py-1.5 text-xs font-bold tracking-[0.2em] uppercase rounded-full shadow-[0_4px_14px_rgba(212,175,55,0.4)]">
-                            Mais Solicitado
+                            Arquitetura Integrada
                         </div>
                         <div className="mb-auto">
-                            <h3 className="text-3xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] mb-2">Premium</h3>
-                            <p className="text-xs text-[#F6F2EA]/60 mb-8 uppercase tracking-widest">Experiência completa</p>
+                            <h3 className="text-3xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] mb-2">Perfil Pleno</h3>
+                            <p className="text-xs text-[#F6F2EA]/60 mb-8 uppercase tracking-widest">A imersão diária</p>
                             <ul className="space-y-5 mb-10">
-                                {["Tudo do Essential", "Som ambiente em 2 zonas", "Controle de climatização", "Câmeras de segurança IP", "Keypads de cena"].map((i, k) => (
+                                {["Infraestrutura de Rede Base", "Áudio oculto multizona", "Climatização com interface limpa", "Monitoramento por CFTV", "Keypads de cena arquitetônicos"].map((i, k) => (
                                     <li key={k} className="flex items-start gap-4 text-sm text-white font-medium leading-relaxed">
                                         <CheckCircle className="w-5 h-5 text-celere-gold shrink-0 mt-0.5" />
                                         <span>{i}</span>
@@ -46,15 +51,15 @@ export function Packages() {
                                 ))}
                             </ul>
                         </div>
-                        <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-[#121212] font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-shadow duration-300">Mais Detalhes</button>
+                        <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-[#121212] font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-shadow duration-300">Solicitar Viabilidade</button>
                     </FadeIn>
 
                     <FadeIn delay={300} direction="up" className="p-10 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md rounded-2xl shadow-sm h-full flex flex-col transition-colors duration-500">
                         <div className="mb-auto">
-                            <h3 className="text-2xl font-serif font-bold text-white mb-2">Ultimate</h3>
-                            <p className="text-xs text-white/50 mb-8 uppercase tracking-widest">Sem limites</p>
+                            <h3 className="text-2xl font-serif font-bold text-white mb-2">Perfil Absolute</h3>
+                            <p className="text-xs text-white/50 mb-8 uppercase tracking-widest">A execução definitiva</p>
                             <ul className="space-y-5 mb-10">
-                                {["Tudo do Premium", "Home Theater Atmos", "Rede corporativa avançada", "Integração arquitetônica", "Biometria facial"].map((i, k) => (
+                                {["Sub-sistemas da linha Pleno", "Acústica Atmos / Cinema Privado", "Cabeamento estruturado Master", "Cortinas motorizadas integradas", "Termografia e biometria dupla"].map((i, k) => (
                                     <li key={k} className="flex items-start gap-4 text-sm text-[#F6F2EA]/80 leading-relaxed">
                                         <CheckCircle className="w-5 h-5 text-celere-gold shrink-0 mt-0.5" />
                                         <span>{i}</span>
@@ -62,7 +67,7 @@ export function Packages() {
                                 ))}
                             </ul>
                         </div>
-                        <button className="w-full py-4 rounded-xl border border-[#FDFBF7]/20 text-[#FDFBF7] font-bold hover:bg-[#FDFBF7] hover:text-[#121212] transition-all duration-300">Mais Detalhes</button>
+                        <button className="w-full py-4 rounded-xl border border-[#FDFBF7]/20 text-[#FDFBF7] font-bold hover:bg-[#FDFBF7] hover:text-[#121212] transition-all duration-300">Explorar Perfil</button>
                     </FadeIn>
 
                 </div>

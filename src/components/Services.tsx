@@ -3,12 +3,12 @@ import { FadeIn } from "./FadeIn";
 
 export function Services() {
     const solutions = [
-        { icon: Lightbulb, title: "Iluminação", desc: "Dimerização precisa, cores adaptativas e criação de cenários estéticos para cada ocasião." },
-        { icon: Speaker, title: "Som & Home Theater", desc: "Áudio invisível multizona de extrema fidelidade e acústica de cinema no seu living." },
-        { icon: Shield, title: "Segurança Ativa", desc: "Biometria avançada, CFTV analítico e monitoramento remoto total." },
-        { icon: Wifi, title: "Rede Premium", desc: "Infraestrutura Wi-Fi corporativa. Zero pontos cegos, estabilidade ininterrupta." },
-        { icon: Settings, title: "Rotinas Inteligentes", desc: "Sua casa acorda, trabalha e descansa com você de forma 100% automatizada." },
-        { icon: Zap, title: "Integrações", desc: "Controle ar-condicionado, cortinas, persianas e lareiras unificados no mesmo App." },
+        { icon: Wifi, title: "Infraestrutura de Rede", desc: "A espinha dorsal do projeto. Wi-Fi de grau corporativo, zero pontos cegos e estabilidade absoluta para sustentar todos os subsistemas." },
+        { icon: Lightbulb, title: "Iluminação Arquitetônica", desc: "Controle lumínico inteligente focado no bem-estar, dimerização precisa e valorização do seu projeto de interiores." },
+        { icon: Speaker, title: "Áudio & Vídeo Oculto", desc: "Performance acústica de alta fidelidade e telas perfeitamente integradas ou invisíveis na sua decoração." },
+        { icon: Settings, title: "Clima & Motorização", desc: "Gestão térmica inteligente integrada à entrada natural de luz via cortinas, garantindo conforto climático constante e invisível." },
+        { icon: Shield, title: "Segurança Perimetral", desc: "Monitoramento analítico de alta resolução, acessos biométricos e blindagem da rotina para tranquilidade total da família." },
+        { icon: Zap, title: "Convergência Total", desc: "A verdadeira inteligência. Sua casa orquestrando todos os sistemas de forma autônoma ou via aplicativo minimalista único." },
     ];
 
     return (
@@ -17,8 +17,8 @@ export function Services() {
             <div className="container mx-auto relative z-10">
                 <FadeIn>
                     <div className="text-center mb-20">
-                        <span className="text-celere-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Ecosistema Célere</span>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#121212]">Experiências Imersivas</h2>
+                        <span className="text-celere-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Fundação Tecnológica</span>
+                        <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#121212]">O Alicerce da sua Interação</h2>
                     </div>
                 </FadeIn>
 

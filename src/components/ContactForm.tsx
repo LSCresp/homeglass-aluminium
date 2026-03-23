@@ -34,9 +34,11 @@ export function ContactForm() {
     };
 
     const faqs = [
-        { q: "A automação funciona sem internet?", a: "Sim. A infraestrutura básica e comandos via rede local mantêm a casa funcionando mesmo sem conexão externa." },
-        { q: "Posso instalar em uma casa pronta?", a: "Temos soluções wireless premium para ambientes prontos, sem necessidade de grandes reformas." },
-        { q: "Qual a diferença entre a Célere e comprar dispositivos smart comuns?", a: "Garantimos estabilidade industrial, integração 100% num único app e design invisível. Equipamentos comuns costumam congestionar redes normais." },
+        { q: "A automação funciona caso a internet caia?", a: "Sim. Nossa infraestrutura prioriza o processamento local. A falha do provedor de internet externo não impede o funcionamento de luzes, clima, áudio ou segurança na rede interna." },
+        { q: "Qual a diferença entre a Célere e comprar dispositivos smart comuns?", a: "Equipamentos de varejo operam como 'ilhas', congestionando seu Wi-Fi doméstico. A Célere entrega engenharia: cabeamento estruturado, estabilidade de sinal, e uma única interface que rege todo o ecossistema corporativo da residência." },
+        { q: "É possível instalar em um imóvel já pronto?", a: "Temos diretrizes de infraestrutura wireless corporativa para retrofits, reduzindo quebra de alvenaria. Porém, uma visita técnica é imperativa para avaliar bloqueios de rádio-frequência." },
+        { q: "O sistema ficará obsoleto? Pode ser expandido futuramente?", a: "Nossos projetos são construídos sobre protocolos abertos e modulares. É totalmente possível integrar novos cômodos ou atualizações sem perder o investimento inicial." },
+        { q: "Como funciona a manutenção a longo prazo?", a: "A Célere atua como uma parceira perene da sua construção. Mais do que garantia, mantemos monitoramento proativo de rede e equipe tática para suporte e refinamentos rápidos." },
     ];
 
     return (
@@ -68,10 +70,10 @@ export function ContactForm() {
             <section id="contato" className="py-32 px-6 bg-gradient-to-b from-[#FDFBF7] to-[#F6F2EA] border-t border-[rgba(18,18,18,.05)] relative pb-40">
                 <div className="container mx-auto px-6 max-w-5xl text-center mb-24">
                     <FadeIn>
-                        <span className="text-celere-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Fale Conosco</span>
-                        <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 text-[#121212]">Pronto para elevar seu padrão?</h2>
+                        <span className="text-celere-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Engenharia Sob Medida</span>
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 text-[#121212]">Inicie seu projeto consultivo</h2>
                         <p className="text-[#121212]/70 text-lg max-w-2xl mx-auto leading-relaxed">
-                            Fale com um de nossos arquitetos de automação. Projetamos experiências sob medida para o seu estilo de vida e necessidades do seu imóvel.
+                            Agende uma imersão técnica. Entendemos que cada imóvel possui um DNA único que exige um projeto de infraestrutura tecnológica rigoroso e exclusivo.
                         </p>
                     </FadeIn>
                 </div>
@@ -85,12 +87,12 @@ export function ContactForm() {
                             </p>
                             <div className="space-y-4">
                                 <div className="flex items-center gap-4 text-sm text-celere-gray">
-                                    <div className="w-10 h-10 rounded-full bg-celere-dark flex items-center justify-center border border-celere-gold/20 shadow-sm text-lg text-celere-black">📍</div>
-                                    Atendemos todo o Brasil para projetos premium
+                                    <div className="w-10 h-10 rounded-full bg-celere-dark flex items-center justify-center border border-celere-gold/20 shadow-sm text-lg text-celere-black">📐</div>
+                                    Análise estrutural da planta e alinhamento do escopo
                                 </div>
                                 <div className="flex items-center gap-4 text-sm text-celere-gray">
-                                    <div className="w-10 h-10 rounded-full bg-celere-dark flex items-center justify-center border border-celere-gold/20 shadow-sm text-lg text-celere-black">📞</div>
-                                    Horário agendado para sua total conveniência
+                                    <div className="w-10 h-10 rounded-full bg-celere-dark flex items-center justify-center border border-celere-gold/20 shadow-sm text-lg text-celere-black">🤝</div>
+                                    Reuniões agendadas conforme sua disponibilidade
                                 </div>
                             </div>
                         </div>
@@ -135,9 +137,9 @@ export function ContactForm() {
                                     </div>
 
                                     <button type="submit" className="w-full bg-[#121212] py-4 rounded-xl text-white font-bold tracking-wide hover:bg-celere-gold transition-colors duration-300 shadow-[0_4px_14px_rgb(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.23)] mt-4">
-                                        Solicitar Contato
+                                        Solicitar Viabilidade Técnica
                                     </button>
-                                    <p className="text-xs text-center text-[#121212]/50 mt-6 tracking-wide">Seus dados estão seguros. Não enviamos spam.</p>
+                                    <p className="text-xs text-center text-[#121212]/50 mt-6 tracking-wide">Seus dados estão protegidos sob sigilo de projeto.</p>
                                 </form>
                             </div>
                         </FadeIn>
@@ -152,9 +154,9 @@ export function ContactForm() {
 
                 <div className="container mx-auto px-6 flex flex-col items-center relative z-10 w-full pt-2">
                     <div className="bg-[#FDFBF7] px-3 py-1.5 rounded-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] mb-3">
-                        <img src="/logo.png" alt="Célere Casa Inteligente" className="h-[4rem] md:h-[5rem] w-auto object-contain opacity-95 drop-shadow-sm filter contrast-[1.05]" />
+                        <img src="/logo.png" alt="Célere Engenharia de Automação" className="h-[4rem] md:h-[5rem] w-auto object-contain opacity-95 drop-shadow-sm filter contrast-[1.05]" />
                     </div>
-                    <p className="text-xs tracking-wide">© {new Date().getFullYear()} Célere - Casa Inteligente. Todos os direitos reservados.</p>
+                    <p className="text-xs tracking-wide">© {new Date().getFullYear()} Célere - Engenharia de Automação para Alto Padrão. Todos os direitos reservados.</p>
                 </div>
             </footer>
         </>

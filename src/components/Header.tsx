@@ -41,7 +41,7 @@ export function Header() {
                 <a href="#" className="flex items-center gap-4 outline-none transition-transform hover:scale-105 duration-500">
                     <img
                         src="/logo.png"
-                        alt="Célere Casa Inteligente"
+                        alt="Célere Engenharia de Automação"
                         className={`w-auto object-contain rounded-2xl transition-all duration-500 relative z-10 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] ${scrolled ? 'h-[3rem] md:h-[4.5rem]' : 'h-[4.5rem] md:h-[6.5rem]'}`}
                     />
                 </a>
@@ -56,11 +56,11 @@ export function Header() {
                         <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                     </a>
                     <a href="#pacotes" className="relative group px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-2xl border border-white/20 hover:bg-white/20 hover:border-white/40 hover:text-white transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] shadow-[inset_0_1px_1px_rgba(253,251,247,0.4)]">
-                        Pacotes
+                        Perfis
                         <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                     </a>
                     <a href="#contato" className="ml-2 bg-gold-gradient text-[#121212] px-8 py-3 rounded-full hover:brightness-110 transition-all duration-500 shadow-[0_4px_14px_rgba(212,175,55,0.2)] hover:shadow-[0_6px_25px_rgba(212,175,55,0.35)] font-bold tracking-wider text-sm relative overflow-hidden group flex items-center gap-2">
-                        <span className="relative z-10 transition-transform group-hover:-translate-x-1">Solicitar Orçamento</span>
+                        <span className="relative z-10 transition-transform group-hover:-translate-x-1">Solicitar Viabilidade</span>
                         <span className="relative z-10 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 font-black">&rarr;</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] skew-x-[-30deg] animate-[shine_3s_ease-in-out_infinite] transition-colors"></div>
                     </a>
@@ -76,9 +76,9 @@ export function Header() {
                 <nav className="flex flex-col p-8 gap-6 text-white/90 text-[15px] font-medium tracking-wide">
                     <a href="#solucoes" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Soluções</a>
                     <a href="#diferenciais" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Diferenciais</a>
-                    <a href="#pacotes" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Pacotes</a>
+                    <a href="#pacotes" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Perfis de Projeto</a>
                     <a href="#contato" onClick={() => setIsMenuOpen(false)} className="text-celere-gold font-bold mt-4 tracking-wider flex items-center justify-between">
-                        Solicitar Orçamento <span>&rarr;</span>
+                        Solicitar Viabilidade <span>&rarr;</span>
                     </a>
                 </nav>
             </div>

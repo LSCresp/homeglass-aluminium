@@ -35,15 +35,14 @@ export function Hero() {
           </div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 max-w-4xl leading-[1.05] text-[#121212]">
-            A harmonia perfeita entre{" "}
+            Engenharia de Automação para{" "}
             <span className="bg-gold-gradient text-transparent bg-clip-text">
-              Luxo e Tecnologia
+              Projetos Exclusivos
             </span>
           </h1>
 
           <p className="text-base md:text-lg text-[#121212]/70 mb-10 max-w-2xl leading-relaxed">
-            Sua rotina elevada ao mais alto padrão. Controle iluminação, clima, som e
-            segurança de forma invisível, elegante e na palma da mão.
+            A infraestrutura invisível do seu imóvel. Projetamos, integramos e executamos sistemas de conforto, estabilidade e segurança integrados à arquitetura para garantir uma rotina absolutamente fluida.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -53,14 +52,14 @@ export function Hero() {
               rel="noreferrer"
               className="bg-gold-gradient text-[#121212] px-8 py-4 rounded-full font-bold text-center transition-transform hover:scale-[1.02] shadow-lg hover:shadow-[0_12px_40px_rgba(212,175,55,.18)] flex justify-center items-center gap-2"
             >
-              Falar com Especialista
+               Agendar Consultoria
             </a>
 
             <a
-              href="#contato"
+              href="#diferenciais"
               className="border border-[rgba(18,18,18,.16)] text-[#121212] px-8 py-4 rounded-full font-bold text-center hover:border-celere-gold/60 hover:bg-[#FFFCF6] transition-colors"
             >
-              Solicitar Projeto
+              Conhecer a Metodologia
             </a>
           </div>
         </div>
@@ -70,16 +69,18 @@ export function Hero() {
         <div className="container mx-auto max-w-4xl text-center">
           <div className="rounded-3xl bg-[#FFFCF6] border border-[rgba(18,18,18,.08)] px-6 py-12 md:px-12 shadow-sm">
             <h2 className="text-3xl md:text-4xl font-serif mb-8 text-[#121212] font-bold">
-              A tecnologia deve ser uma aliada,{" "}
-              <span className="text-[#121212]/55 line-through decoration-celere-gold">
-                não uma complexidade.
+              Automação não é sobre os produtos.{" "}
+              <br className="hidden md:block" />
+              <span className="text-celere-gold">
+                É sobre a fundação lógica do imóvel.
               </span>
             </h2>
 
             <p className="text-[#121212]/70 text-base md:text-lg leading-relaxed">
-              Eliminamos os incontáveis controles remotos e paredes poluídas por interruptores
-              confusos. Na Célere, consolidamos o ecossistema da sua residência em interfaces
-              limpas, confiáveis e pensadas exclusivamente para a rotina da sua família.
+              Dispositivos soltos não compõem uma casa inteligente, apenas fragmentam sua rotina. 
+              Na Célere, consolidamos o ecossistema tecnológico do seu imóvel através de um projeto 
+              de engenharia robusto: centralizando o controle, purificando a alvenaria de excesso de interruptores 
+              e entregando interfaces confiáveis, elegantes e desenhadas exclusivamente para a sua família.
             </p>
           </div>
         </div>
