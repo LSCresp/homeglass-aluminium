@@ -55,8 +55,8 @@ export function ContactForm() {
             console.error("Erro ao registrar no sheets via webhook", error);
         }
 
-        // B) Abreva o WhatsApp com a notificação
-        window.open(`https://wa.me/5514991682432?text=${msg}`, "_blank");
+        // B) Abre o WhatsApp com a notificação do cliente para a Empresa
+        window.open(`https://wa.me/5514997302774?text=${msg}`, "_blank");
     };
 
     const faqs = [
