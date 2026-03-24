@@ -6,12 +6,6 @@ export async function POST(request: Request) {
         
         // HIGIENE E SEGURANÇA: Limitação de Textos Pesados ou Scripts
         const strSafe = (str: any, max: number) => typeof str === 'string' ? str.substring(0, max) : "Ilegível";
-        
-        const forceWordLimit = (text: any, maxWords: number) => {
-            if (typeof text !== 'string') return "";
-            const words = text.trim().split(/\s+/);
-            return words.length > maxWords ? words.slice(0, maxWords).join(" ") + " ...[CORTADO: MAX 500 PALAVRAS]" : text;
-        };
 
         const body = {
             nome: strSafe(rawBody.nome, 120),
@@ -19,8 +13,8 @@ export async function POST(request: Request) {
             cidade: strSafe(rawBody.cidade, 80),
             uf: strSafe(rawBody.uf, 5),
             situacao: strSafe(rawBody.situacao, 120),
-            prioridades: forceWordLimit(rawBody.prioridades, 100),
-            observacoes: forceWordLimit(rawBody.observacoes, 500),
+            prioridades: strSafe(rawBody.prioridades, 200),
+            observacoes: strSafe(rawBody.observacoes, 1000), // Substituído limite por palavra por 1000 Caracteres
             data_solicitacao: strSafe(rawBody.data_solicitacao, 60)
         };
         

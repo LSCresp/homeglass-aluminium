@@ -19,6 +19,27 @@ export function ContactForm() {
 
     // Custom Dropdown States
     const [citySearch, setCitySearch] = useState("");
+    
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let v = e.target.value.replace(/\D/g, ""); // Retira tudo que não é dígito
+        
+        if (v.length <= 11) {
+            v = v.replace(/^(\d{2})(\d)/g, '($1) $2'); // Coloca parênteses
+            v = v.replace(/(\d)(\d{4})$/, '$1-$2');    // Coloca hífen
+        } else {
+            v = v.substring(0, 15); // Limita tamanho total
+        }
+        
+        setFormData({ ...formData, whatsapp: v });
+    };
+
+    const handleInvalid = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        (e.target as HTMLInputElement).setCustomValidity('Por favor, preencha este campo obrigatório.');
+    };
+    const handleInput = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        (e.target as HTMLInputElement).setCustomValidity('');
+    };
+
     const [showCityDropdown, setShowCityDropdown] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -211,6 +232,8 @@ export function ContactForm() {
                                                 className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]"
                                                 placeholder="Seu nome completo"
                                                 required
+                                                onInvalid={handleInvalid}
+                                                onInput={handleInput}
                                                 value={formData.nome}
                                                 onChange={e => setFormData({ ...formData, nome: e.target.value })}
                                             />
@@ -222,8 +245,11 @@ export function ContactForm() {
                                                 className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]"
                                                 placeholder="(00) 00000-0000"
                                                 required
+                                                maxLength={15}
+                                                onInvalid={handleInvalid}
+                                                onInput={handleInput}
                                                 value={formData.whatsapp}
-                                                onChange={e => setFormData({ ...formData, whatsapp: e.target.value })}
+                                                onChange={handlePhoneChange}
                                             />
                                         </div>
 
@@ -325,6 +351,7 @@ export function ContactForm() {
                                         <textarea
                                             className="w-full bg-[#FAFAFA] border border-[rgba(18,18,18,.08)] rounded-xl px-5 py-4 h-28 resize-none focus:outline-none focus:border-celere-gold/50 focus:bg-[#FDFBF7] focus:ring-4 focus:ring-celere-gold/5 transition-all text-[#121212]/80 leading-relaxed"
                                             placeholder="Descreva particularidades do projeto, ambientes principais ou dúvidas extras..."
+                                            maxLength={1000}
                                             value={formData.observacoes}
                                             onChange={e => setFormData({ ...formData, observacoes: e.target.value })}
                                         ></textarea>
