@@ -9,17 +9,17 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                celere: {
-                    gold: "#D4AF37",
-                    goldLight: "#F5DEB3",
-                    black: "#000000",
-                    dark: "#FAFAFA",
-                    gray: "#555555",
-                    white: "#FDFBF7",
+                homeglass: {
+                    silver: "#C0C5CE",
+                    silverLight: "#E2E8F0",
+                    black: "#050B14",
+                    dark: "#0F172A",
+                    gray: "#94A3B8",
+                    white: "#F8FAFC",
                 },
             },
             backgroundImage: {
-                'gold-gradient': 'linear-gradient(135deg, #D4AF37, #F5DEB3)',
+                'silver-gradient': 'linear-gradient(135deg, #94A3B8, #E2E8F0)',
             },
             fontFamily: {
                 serif: ['var(--font-playfair)'],

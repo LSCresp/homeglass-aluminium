@@ -24,7 +24,7 @@ export function Header() {
     }, [isMenuOpen]);
 
     return (
-        <header className={`fixed top-0 w-full z-50 transition-all duration-500 border-b border-celere-gold/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] ${scrolled
+        <header className={`fixed top-0 w-full z-50 transition-all duration-500 border-b border-homeglass-silver/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] ${scrolled
             ? "bg-[#050505]/95 backdrop-blur-xl py-2"
             : "py-5"
             }`}>
@@ -38,28 +38,20 @@ export function Header() {
             <div className={`absolute inset-0 w-full h-full z-[-1] transition-all duration-500 ${scrolled ? 'opacity-0' : 'bg-black/50'}`}></div>
 
             <div className="container mx-auto px-6 md:px-10 flex items-center justify-between transition-all duration-500">
-                <a href="#" className="flex items-center gap-4 outline-none transition-transform hover:scale-105 duration-500">
+                <a href="/" className="flex items-center gap-4 outline-none transition-transform hover:scale-105 duration-500">
                     <img
                         src="/logo.png"
-                        alt="Célere Engenharia de Automação"
-                        className={`w-auto object-contain rounded-2xl transition-all duration-500 relative z-10 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] ${scrolled ? 'h-[3rem] md:h-[4.5rem]' : 'h-[4.5rem] md:h-[6.5rem]'}`}
+                        alt="HomeGlass Aluminium"
+                        className={`w-auto object-contain rounded-2xl transition-all duration-500 relative z-10 drop-shadow-[0_0_8px_rgba(255,255,255,0.15)] ${scrolled ? 'h-[3rem] md:h-[4.5rem]' : 'h-[4.5rem] md:h-[6.5rem]'}`}
                     />
                 </a>
 
                 <nav className="hidden md:flex items-center gap-6 text-[14px] font-semibold tracking-wide text-white/90">
-                    <a href="#solucoes" className="relative group px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-2xl border border-white/20 hover:bg-white/20 hover:border-white/40 hover:text-white transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] shadow-[inset_0_1px_1px_rgba(253,251,247,0.4)]">
-                        Soluções
+                    <a href="/portfolio" className="relative group px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-2xl border border-white/20 hover:bg-white/20 hover:border-white/40 hover:text-white transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] shadow-[inset_0_1px_1px_rgba(253,251,247,0.4)]">
+                        Ver Portfólio
                         <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                     </a>
-                    <a href="#diferenciais" className="relative group px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-2xl border border-white/20 hover:bg-white/20 hover:border-white/40 hover:text-white transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] shadow-[inset_0_1px_1px_rgba(253,251,247,0.4)]">
-                        Diferenciais
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                    </a>
-                    <a href="#pacotes" className="relative group px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-2xl border border-white/20 hover:bg-white/20 hover:border-white/40 hover:text-white transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] shadow-[inset_0_1px_1px_rgba(253,251,247,0.4)]">
-                        Perfis
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                    </a>
-                    <a href="#contato" className="ml-2 bg-gold-gradient text-[#121212] px-8 py-3 rounded-full hover:brightness-110 transition-all duration-500 shadow-[0_4px_14px_rgba(212,175,55,0.2)] hover:shadow-[0_6px_25px_rgba(212,175,55,0.35)] font-bold tracking-wider text-sm relative overflow-hidden group flex items-center gap-2">
+                    <a href="/#contato" className="ml-2 bg-silver-gradient text-[#121212] px-8 py-3 rounded-full hover:brightness-110 transition-all duration-500 shadow-[0_4px_14px_rgba(192,197,206,0.2)] hover:shadow-[0_6px_25px_rgba(192,197,206,0.35)] font-bold tracking-wider text-sm relative overflow-hidden group flex items-center gap-2">
                         <span className="relative z-10 transition-transform group-hover:-translate-x-1">Solicitar Orçamento</span>
                         <span className="relative z-10 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 font-black">&rarr;</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] skew-x-[-30deg] animate-[shine_3s_ease-in-out_infinite] transition-colors"></div>
@@ -74,10 +66,8 @@ export function Header() {
             {/* Mobile Menu Overlay */}
             <div className={`md:hidden absolute top-[100%] left-0 w-full bg-[#121212]/95 backdrop-blur-3xl border-b border-white/10 transition-all duration-500 overflow-hidden ${isMenuOpen ? "max-h-[400px] opacity-100 shadow-2xl" : "max-h-0 opacity-0"}`}>
                 <nav className="flex flex-col p-8 gap-6 text-white/90 text-[15px] font-medium tracking-wide">
-                    <a href="#solucoes" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Soluções</a>
-                    <a href="#diferenciais" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Diferenciais</a>
-                    <a href="#pacotes" onClick={() => setIsMenuOpen(false)} className="hover:text-celere-gold transition-colors py-2 border-b border-white/5">Perfis de Projeto</a>
-                    <a href="#contato" onClick={() => setIsMenuOpen(false)} className="text-celere-gold font-bold mt-4 tracking-wider flex items-center justify-between">
+                    <a href="/portfolio" onClick={() => setIsMenuOpen(false)} className="hover:text-homeglass-silver transition-colors py-2 border-b border-white/5">Ver Portfólio</a>
+                    <a href="/#contato" onClick={() => setIsMenuOpen(false)} className="text-homeglass-silver font-bold mt-4 tracking-wider flex items-center justify-between">
                         Solicitar Orçamento <span>&rarr;</span>
                     </a>
                 </nav>
