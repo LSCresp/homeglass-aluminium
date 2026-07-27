@@ -30,9 +30,21 @@ function formatarTelefone(numero: string) {
     return `+55 (${ddd}) ${parte1}-${parte2}`;
 }
 
-const linkWhatsapp = `https://wa.me/${CONTATO.whatsapp}?text=${encodeURIComponent(
-    CONTATO.whatsappMensagem
-)}`;
+function linkWhatsapp(numero: string) {
+    return `https://wa.me/${numero}?text=${encodeURIComponent(CONTATO.whatsappMensagem)}`;
+}
+
+/**
+ * Quem atende neste cartão. Sem isso, o cartão é o institucional e
+ * usa o telefone da empresa; com isso, é o cartão de um representante.
+ */
+export type PessoaCartao = {
+    slug: string;
+    nome: string;
+    cargo?: string;
+    telefone: string;
+    whatsapp: string;
+};
 
 /* ------------------------------------------------------------------
  * Os cinco contatos, na ordem em que aparecem no arco: da ponta
@@ -56,11 +68,12 @@ type Contato = {
     icone: React.ReactNode;
 };
 
-const CONTATOS: Contato[] = [
+function montarContatos(telefone: string, whatsapp: string, quem: string): Contato[] {
+    return [
     {
         id: "telefone",
-        rotulo: "Ligar para a HomeGlass",
-        href: `tel:+${CONTATO.telefone}`,
+        rotulo: `Ligar para ${quem}`,
+        href: `tel:+${telefone}`,
         x: "11%",
         y: 34,
         hover: "group-hover:border-homeglass-silver/70 group-hover:bg-homeglass-silver/20",
@@ -88,8 +101,8 @@ const CONTATOS: Contato[] = [
     },
     {
         id: "whatsapp",
-        rotulo: "Falar no WhatsApp",
-        href: linkWhatsapp,
+        rotulo: `Falar no WhatsApp com ${quem}`,
+        href: linkWhatsapp(whatsapp),
         externo: true,
         x: "50%",
         y: 130,
@@ -129,7 +142,8 @@ const CONTATOS: Contato[] = [
             </svg>
         ),
     },
-];
+    ];
+}
 
 /** Entrada suave em CSS puro — sempre visível, mesmo sem JS ou observer. */
 function Aparecer({
@@ -148,7 +162,11 @@ function Aparecer({
     );
 }
 
-export function CartaoDigital() {
+export function CartaoDigital({ pessoa }: { pessoa?: PessoaCartao }) {
+    const telefone = pessoa?.telefone ?? CONTATO.telefone;
+    const whatsapp = pessoa?.whatsapp ?? CONTATO.whatsapp;
+    const contatos = montarContatos(telefone, whatsapp, pessoa?.nome ?? CONTATO.empresa);
+
     return (
         <main className="relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-homeglass-black text-white">
             {/* ---------------- Fundo ---------------- */}
@@ -197,7 +215,7 @@ export function CartaoDigital() {
             </div>
 
             {/* ---------------- Conteúdo ---------------- */}
-            <div className="relative z-10 mx-auto flex w-full max-w-md flex-col items-center px-6 py-5 text-center sm:my-10 sm:rounded-[36px] sm:border sm:border-white/10 sm:bg-white/[0.04] sm:py-9 sm:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] sm:backdrop-blur-xl">
+            <div className="relative z-10 mx-auto flex w-full max-w-md flex-col items-center px-6 py-4 text-center sm:my-10 sm:rounded-[36px] sm:border sm:border-white/10 sm:bg-white/[0.04] sm:py-9 sm:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] sm:backdrop-blur-xl">
                 {/* Logo */}
                 <Aparecer>
                     <div className="relative h-[100px] w-[100px] rounded-full p-[2px] bg-silver-gradient shadow-[0_18px_50px_-12px_rgba(0,0,0,0.95)]">
@@ -222,13 +240,30 @@ export function CartaoDigital() {
                             Aluminium
                         </span>
                     </h1>
-                    <p className="mt-2 text-[10px] font-medium uppercase tracking-[0.32em] text-homeglass-silver/80">
-                        {CONTATO.slogan}
-                    </p>
+                    {/* No cartão do representante, quem ele é ocupa o lugar do slogan */}
+                    {pessoa ? (
+                        <div className="mt-3 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1 backdrop-blur-md">
+                            <span className="text-[13px] font-semibold tracking-wide text-white">
+                                {pessoa.nome}
+                            </span>
+                            {pessoa.cargo && (
+                                <>
+                                    <span className="text-white/25">|</span>
+                                    <span className="text-[10px] uppercase tracking-[0.14em] text-homeglass-silver/80">
+                                        {pessoa.cargo}
+                                    </span>
+                                </>
+                            )}
+                        </div>
+                    ) : (
+                        <p className="mt-2 text-[10px] font-medium uppercase tracking-[0.32em] text-homeglass-silver/80">
+                            {CONTATO.slogan}
+                        </p>
+                    )}
                 </Aparecer>
 
                 {/* Divisor */}
-                <Aparecer delay={200} className="my-3 w-full">
+                <Aparecer delay={200} className="my-2.5 w-full">
                     <div className="mx-auto h-px w-40 bg-gradient-to-r from-transparent via-homeglass-silver/50 to-transparent" />
                 </Aparecer>
 
@@ -237,7 +272,7 @@ export function CartaoDigital() {
                     <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/45">
                         Atuação
                     </p>
-                    <ul className="mt-2.5 space-y-0.5">
+                    <ul className="mt-2 space-y-0.5">
                         {ATUACAO.map((item) => (
                             <li key={item} className="text-[13.5px] leading-relaxed text-white/85">
                                 {item}
@@ -247,7 +282,7 @@ export function CartaoDigital() {
                 </Aparecer>
 
                 {/* Arco de contatos */}
-                <Aparecer delay={340} className="mt-6 w-full">
+                <Aparecer delay={340} className="mt-5 w-full">
                     <div className="relative mx-auto h-[172px] w-full max-w-[340px]">
                         {/* Linha curva que amarra os ícones */}
                         <svg
@@ -272,7 +307,7 @@ export function CartaoDigital() {
                             />
                         </svg>
 
-                        {CONTATOS.map((contato) => (
+                        {contatos.map((contato) => (
                             <a
                                 key={contato.id}
                                 href={contato.href}
@@ -297,15 +332,15 @@ export function CartaoDigital() {
                 </Aparecer>
 
                 {/* Rodapé */}
-                <Aparecer delay={420} className="mt-1 w-full">
+                <Aparecer delay={420} className="w-full">
                     <p className="text-[10px] uppercase tracking-[0.28em] text-white/40">
                         Toque nos ícones
                     </p>
                     <p className="mt-2 text-[11px] tracking-wide text-white/40">
-                        {formatarTelefone(CONTATO.telefone)}
+                        {formatarTelefone(telefone)}
                         <span className="mx-2 text-white/20">|</span>
                         <a
-                            href="/homeglass-aluminium.vcf"
+                            href={pessoa ? `/cartao/${pessoa.slug}/contato.vcf` : "/homeglass-aluminium.vcf"}
                             download
                             className="underline decoration-white/25 underline-offset-4 transition-colors hover:text-white"
                         >
