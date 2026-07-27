@@ -27,17 +27,22 @@ export type Representante = {
 };
 
 export const REPRESENTANTES: Representante[] = [
-    // Ainda sem representantes cadastrados — enquanto esta lista estiver
-    // vazia, nenhum cartão de vendedor existe e /cartao/<qualquer-coisa>
-    // devolve 404. Modelo de cadastro:
-    //
-    // {
-    //     slug: "joao-silva",
-    //     nome: "João Silva",
-    //     cargo: "Consultor Comercial",   // opcional
-    //     telefone: "5514991234567",
-    //     whatsapp: "5514991112222",      // opcional, só se for outro número
-    // },
+    {
+        slug: "alessandro",
+        nome: "Alessandro",
+        telefone: "5516981332656",
+    },
+    {
+        slug: "marcelo",
+        nome: "Marcelo",
+        telefone: "5514997105500",
+    },
+    {
+        // Mesmo número do "Fale Conosco" do site.
+        slug: "ricardo",
+        nome: "Ricardo",
+        telefone: "5514991619177",
+    },
 ];
 
 export function buscarRepresentante(slug: string): Representante | undefined {
