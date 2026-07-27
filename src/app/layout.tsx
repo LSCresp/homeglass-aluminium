@@ -7,6 +7,7 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: '--font-montserrat
 const monoton = Monoton({ weight: '400', subsets: ["latin"], variable: '--font-monoton' });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://homeglassaluminium.netlify.app"),
     title: "HomeGlass Aluminium | Esquadrias de Alumínio e Vidro Premium",
     description: "Projetos personalizados de esquadrias de alumínio, fachadas e vidros de alto padrão.",
     openGraph: {

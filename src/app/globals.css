@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes cartaoAparecer {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 :root {
   --background: #FFFFFF;
   --foreground: #000000;
@@ -22,6 +34,18 @@ body {
     /* Padrão art-déco super sutil com o dourado */
     background-image: radial-gradient(rgba(212, 175, 55, 0.15) 1px, transparent 1px);
     background-size: 32px 32px;
+  }
+
+  /* Entrada do cartão de visitas digital (/cartao) — CSS puro, sem
+     IntersectionObserver, para o conteúdo nunca ficar invisível. */
+  .cartao-aparecer {
+    animation: cartaoAparecer 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cartao-aparecer {
+      animation: none;
+    }
   }
 
   .logo-wordmark {
