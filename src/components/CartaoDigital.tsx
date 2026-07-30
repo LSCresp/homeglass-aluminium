@@ -172,7 +172,7 @@ export function CartaoDigital({ pessoa }: { pessoa?: PessoaCartao }) {
             {/* ---------------- Fundo ---------------- */}
             <div className="absolute inset-0 z-0" aria-hidden="true">
                 {/* Foto do site, bem apagada, só para dar profundidade */}
-                <Image src="/hero-image.png" alt="" fill priority className="object-cover opacity-[0.22]" />
+                <Image src="/hero-image.jpg" alt="" fill priority className="object-cover opacity-[0.22]" />
 
                 {/* Escurecimento geral */}
                 <div className="absolute inset-0 bg-gradient-to-b from-homeglass-black/80 via-homeglass-dark/90 to-homeglass-black" />

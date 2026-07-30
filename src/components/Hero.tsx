@@ -6,7 +6,7 @@ export function Hero() {
       <section className="relative overflow-hidden pt-20 pb-32 md:pt-32 md:pb-40 px-6 min-h-[90vh] flex items-center">
         {/* Imagem em Fundo preenchendo toda a section (passa por trás do header fixo) */}
         <img
-          src="/hero-image.png"
+          src="/hero-image.jpg"
           alt="HomeGlass Esquadrias"
           className="absolute inset-0 w-full h-full object-cover z-0"
         />

@@ -40,7 +40,7 @@ export function Header() {
             <div className="container mx-auto px-6 md:px-10 flex items-center justify-between transition-all duration-500">
                 <a href="/" className="flex items-center gap-4 outline-none transition-transform hover:scale-105 duration-500">
                     <img
-                        src="/logo.png"
+                        src="/logo.jpg"
                         alt="HomeGlass Aluminium"
                         className={`w-auto object-contain rounded-2xl transition-all duration-500 relative z-10 drop-shadow-[0_0_8px_rgba(255,255,255,0.15)] ${scrolled ? 'h-[3rem] md:h-[4.5rem]' : 'h-[4.5rem] md:h-[6.5rem]'}`}
                     />
